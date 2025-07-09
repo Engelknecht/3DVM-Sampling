@@ -45,6 +45,8 @@ L_kle = chol(Sigma_kle, 'lower');
 %% 5 | Collocation Punkte für PCE
 [Xi_samples, w_samples] = generateCollocationPoints(Xi_dim, p_order);   % Gauss-Hermite Punkte
 P = size(Xi_samples,1);
+% Visualisiere die Collocation-Punkte für jede Zufallsvariable separat
+plotCollocationPoints(Xi_samples);
 
 QoI_samples = zeros(P, 5);  % Speicher für 5 QoIs
 results = struct();         % letztes erfolgreiches Resultat
@@ -99,6 +101,8 @@ coeffs = computePCEcoeffs(QoI_samples, Xi_samples, p_order);
 
 % Tabelle der QoI-Stichproben ausgeben
 printQoITable(QoI_samples);
+% Histogramme jeder QoI-Spalte anzeigen
+plotQoIHistograms(QoI_samples);
 
 %% 6 | PCE-Approximation auswerten (z. B. über Regression oder quadr. Projekt)
 coeffs = computePCEcoeffs(QoI_samples, Xi_samples, p_order);
